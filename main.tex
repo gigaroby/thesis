@@ -1,58 +1,43 @@
-% book example for classicthesis.sty
-\documentclass[
-  % Replace twoside with oneside if you are printing your thesis on a single side
-  % of the paper, or for viewing on screen.
-  %oneside,
-  twoside,
-  11pt, a4paper,
-  footinclude=true,
-  headinclude=true,
-  cleardoublepage=empty
-]{scrbook}
+\documentclass[a4paper,11pt]{report}
+\usepackage[english]{babel}
 
-\usepackage{lipsum}
-\usepackage[linedheaders,parts,pdfspacing]{classicthesis}
+\usepackage{graphicx}
+\usepackage{cmap}
+\usepackage{cite}
+\usepackage[T1]{fontenc}
+\usepackage{tipa}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+\usepackage{listings}
+
 \usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{acronym}
+\usepackage{amsfonts}
+\usepackage{epigraph}
+\usepackage{listings}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+\usepackage{paralist}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
 
-\title{Boh}
-\author{Bla bla}
+\setlength\epigraphwidth{11cm}
+\setlength\epigraphrule{0pt}
+
+\newcommand\chap[1]{%
+  \chapter*{#1}%
+  \addcontentsline{toc}{chapter}{\protect\numberline{}#1}}
+
+\title{Bluetooth Qualcosa}
+\author{Roberto Bampi \and Marco Dallagiacoma}
 
 \begin{document}
-
-\maketitle
-
-\include{FrontBackMatter/abstract}
-\include{FrontBackMatter/dedication}
-\include{FrontBackMatter/acknowledgements}
-\include{FrontBackMatter/declaration}
-\include{FrontBackMatter/contents}
-
-\part{First Part of My Thesis}
-
-\chapter{A Chapter}
-\lipsum[1] % This is just some filler text. Remove before you start writing
-
-\section{A Section}
-\lipsum[1] % This is just some filler text. Remove before you start writing
-
-\section{Another Section}
-\lipsum[1] % This is just some filler text. Remove before you start writing
-
-\chapter{Another Chapter}
-\lipsum[1] % This is just some filler text. Remove before you start writing
-
-\section{Yet Another Section}
-\lipsum[1] % This is just some filler text. Remove before you start writing
-
-\part{Another Part}
-
-\chapter{Yet Another Chapter}
-\lipsum[1] % This is just some filler text. Remove before you start writing
-  
-\part{}
-\chapter{ Chapter}
-\lipsum[1]
-    
+	\input{copertina}
+  	\tableofcontents
+  	\input{preface}  
+  	\input{bluetooth}
+  	\input{application}
+  	\bibliographystyle{unsrt}
+  	\bibliography{biblio}
 \end{document}
