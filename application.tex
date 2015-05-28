@@ -9,10 +9,12 @@ It is implemented as a native Android application.
 \dots
 
 \subsection{Bluetooth on Android}
-Older versions of Android relied on Bluez \cite{bluez} as the implementation of the Bluetooth stack.
-Since version 4.2, BlueZ has been replaced by BlueDroid \cite{bluedroid}. 
+Older versions of Android relied on BlueZ \cite{bluez} as the implementation of the Bluetooth stack.
+Since version 4.2, BlueZ has been replaced by BlueDroid \cite{bluedroid}, an implementation of the Bluetooth Stack developed by Broadcom. 
 
-The Android SDK only provides RFCOMM as the transport layer and wraps it into a Java Socket. \dots
+The Android SDK only provides RFCOMM as the transport layer \cite{android_rfcomm} and wraps it into a Java Socket \cite{android_rfcomm_java_socket}. 
+
+\dots
 
 \section{Architectural Overview}
 The application is split into two main components: the UI layer and the communication service.
@@ -31,15 +33,12 @@ It does so by periodically turning on and off the inquiry scan of the Bluetooth 
 Both the amount of time between discoveries and the length of the discovery itself are configurable parameters.
 Since the inquiry scan severely impacts the performance of the connection, outgoing messages are queued until the scan is completed.
 
-The listening thread awaits for connections from other devices. When a new connection is detected a worker thread which will handle the new connection is spawned.
+The listening thread awaits for connections from other devices. When a new connection is detected a worker thread which will handle the new connection is created and put in a queue.
 
+The thread pool waits for jobs to be available in the queue.
+As soon as a job is available one of the free worker threads is tasked with executing the job.
+Constraining the number of concurrent worker threads is especially convenient on a mobile device where reducing battery usage is a priority.
 
-
-
-
-
-
-
-
-
-
+\subsection{Dissemination protocol}
+When a message is received the application relays it to everyone but the original sender.
+At the moment the only supported message is a ping.

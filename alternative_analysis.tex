@@ -1,0 +1,40 @@
+\chapter{Analysis of alteratives}
+\section{Firechat}
+Firechat is a proprietary chat software available for iOS and Android devices.
+It is developed by OpenGarden \cite{opengarden}, a company specialized in the creation of peer-to-peer technology.
+One of the features of Firechat is the ability to communicate with nearby devices in order to exchange messages in the absence of an Internet connections.
+\textbf{Note}: we only tested the Android version of the application.
+
+\paragraph{Nearby Communication} In addition to the various chatrooms available on OpenGarden's servers, Firechat has a ``Nearby'' chatroom that is used to communicate directly with other devices.
+In order to spread messages into the ``Nearby'' chatroom the application leverages a combination of communication methods including: UDP broadcast, Bluetooth RFCOMM, Bluetooth Low Energy (BTLE) \cite{btle} and WiFi Direct \cite{wifi-direct}.
+Messages sent in the ``Nearby'' chatroom are received by everyone else.
+
+\subsection{Analysis}
+Since the source code for the program was not available, some analysis were performed in order to infer the behavior of the application.
+
+\paragraph{Black box testing}
+In the first experiment a copy of the Firechat application was downloaded from the Google Play Store \cite{google-play-store} and installed on three devices.
+Cellular and WiFi connections were turned of while Bluetooth was enabled.
+Manual pairing was performed on all three devices (each of them was paired with the other two) and then the application was open.
+After a couple of minutes where the messages each phone sent were not received by the other two, the three devices connected in a master-slave setup.
+One of the three devices (``A'') received messages sent from the other two (``B'' and ``C'') and was able to send messages to both.
+Messages sent by ``B'' were only received by ``A'' but never by ``C'' and vice versa.
+Any attempt to connect more devices to the chatroom proved unsuccessful.
+This test proved that while a possible communication channel between ``B'' and ``C'' was available through ``A'' the application was not able to exploit it to relay messages.
+
+
+We describe two experiments we performed that, along with the information described in \cite{firechat-analysis-1} \cite{firechat-analysis-2} allowed us to draw the conclusions above.
+
+\subsection{Pitfalls}
+Even though the application allows some form of local communication it has several problems that make it unfit for a context where discretion is important [todo: add reference to article about afghanistan].
+
+\subsubsection{Cleartext protocol}
+First and foremost all of the messages sent through the application are not encrypted in any way: the payload is a json \cite{json} object with the username and the message as keys.
+This makes it trivially easy for an attacker to intercept and tamper messages.
+Additionally if the recipient receives a message it has no way to verify its origin. This is true for both local (``Nearby'') and remote communication.
+
+\subsubsection{Single hop communication}
+When a device running Firechat receives a connection (on RFCOMM or Wifi-Direct) it sends to the newly connected peer the last 5 messages it sent to the ``Nearby'' room. It does not, however, re-send messages it received from its neighbors. This means that if a device ``A'' sends a message to device ``B'' and device ``B'' later encounters ``C'', ``C'' will not be able to know what ``A'' said (but it will receive the last 5 messages sent by ``B'').
+[INSERISCI GRAFICO QUI]
+
+
