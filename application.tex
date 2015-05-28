@@ -5,17 +5,6 @@ MeshChat is a mobile application that allows Bluetooth-enabled smartphones to ex
 This approach is especially useful in contexts where the access to the Internet may be absent or severely censored by a central authority.
 It is implemented as a native Android application.
 
-\subsection{Android}
-\dots
-
-\subsection{Bluetooth on Android}
-Older versions of Android relied on BlueZ \cite{bluez} as the implementation of the Bluetooth stack.
-Since version 4.2, BlueZ has been replaced by BlueDroid \cite{bluedroid}, an implementation of the Bluetooth Stack developed by Broadcom. 
-
-The Android SDK only provides RFCOMM as the transport layer \cite{android_rfcomm} and wraps it into a Java Socket \cite{android_rfcomm_java_socket}. 
-
-\dots
-
 \section{Architectural Overview}
 The application is split into two main components: the UI layer and the communication service.
 Each of these runs in its own process, and the communication between the two happens via a form of message passing provided by the Android System \cite{android_message}.

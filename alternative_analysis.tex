@@ -20,8 +20,41 @@ After a couple of minutes where the messages each phone sent were not received b
 One of the three devices (``A'') received messages sent from the other two (``B'' and ``C'') and was able to send messages to both.
 Messages sent by ``B'' were only received by ``A'' but never by ``C'' and vice versa.
 Any attempt to connect more devices to the chatroom proved unsuccessful.
-This test proved that while a possible communication channel between ``B'' and ``C'' was available through ``A'' the application was not able to exploit it to relay messages.
+This test proved that while a possible communication channel between ``B'' and ``C'' was available through ``A'' the application was not able to exploit it to relay messages.\\
 
+Given that the previous experiment was not able to reliably connect devices via Bluetooth two of the devices were replaced with python scripts running on PCs with a Bluetooth dongle.
+In order to communicate to the Firechat application it was necessary to understand how it uses Bluetooth to send messages.
+A service discovery scan on a device with the application opened in revealed that two RFCOMM ports were open, in that case number 4 and number 15.
+The connection on port 4 did not yield any result but the connection on port 15 returned the last 5 messages sent by that device on the ``Nearby'' chat.
+
+\subsubsection{Message format}
+The messages are serialized as a json object with a few different keys.
+While ``user'', ``name'', ``msg'' and ``firechat'' were self-explanatory ``uuid'', ``t'' and ``st'' were not.
+``uuid'' uniquely identifies a message to avoid showing it more than once on the interface.
+``t'' and ``st'' are two unix timestamps \cite{unix-timestamp} always different by a few seconds.
+We were not able to figure out what they represented but they were not needed to perform the tests. 
+
+\begin{lstlisting}[caption=Sample Message,frame=tlrb]{Name}
+{
+  "uuid": "7e2b5e4a-d018-4...",
+  "name": "John Doe",
+  "user": "jdoe01",
+  "msg": "hi jack, you there?",
+  "firechat": "Nearby",
+  "st": 1432828900,
+  "t": 1432828895.314917
+}
+\end{lstlisting}
+
+\paragraph{Black box testing}
+In the first experiment a copy of the Firechat application was downloaded from the Google Play Store \cite{google-play-store} and installed on three devices.
+Cellular and WiFi connections were turned of while Bluetooth was enabled.
+Manual pairing was performed on all three devices (each of them was paired with the other two) and then the application was open.
+After a couple of minutes where the messages each phone sent were not received by the other two, the three devices connected in a master-slave setup.
+One of the three devices (``A'') received messages sent from the other two (``B'' and ``C'') and was able to send messages to both.
+Messages sent by ``B'' were only received by ``A'' but never by ``C'' and vice versa.
+Any attempt to connect more devices to the chatroom proved unsuccessful.
+This test proved that while a possible communication channel between ``B'' and ``C'' was available through ``A'' the application was not able to exploit it to relay messages.
 
 We describe two experiments we performed that, along with the information described in \cite{firechat-analysis-1} \cite{firechat-analysis-2} allowed us to draw the conclusions above.
 
