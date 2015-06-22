@@ -1,0 +1,32 @@
+\subsection{Benchmark Application}
+All of the benchmarking code was implemented in a standard android application which is available on Github \cite{benchmarking-code}.
+The application was responsible for running a simulation and collecting the relevant metrics for each simulation scenario.
+To allow programmatic access to all this functions, a small HTTP server \cite{nanohttpd} was embedded into the application.
+This approach allowed manual testing of the functionality during development as well as allowing a remote script to run the real simulations.
+Three endpoints were exposed on the HTTP server by the application; one to get the Bluetooth name and MAC address of the device and two to run simulations.
+
+A python script was developed to run the individual simulations, collect and plot the data generated in the process.
+The script used the list of local IP addresses as input and collected all of the necessary information via the \texttt{/mac} HTTP endpoint on each device.
+
+
+The second benchmark was designed to test the performance of a device to send multiple messages to a variety of other devices.
+For this test a single device, the master, sent a predefined number of messages to a set of devices.
+When the devices received a message they sent a reply back so that the master could compute the round-trip-time.
+
+To initiate the test the script invoked the \texttt{/messages} endpoint on the master device, passing a list of targets and the number of messages to send to each client as query string parameters.
+
+Each message sent by the master was tagged with a random UUID, so when the response was received, the master was able to compute the round trip time for that message.
+Once the master received a response for every request sent (or after the timeout went off), a CSV was returned as response to the HTTP request.
+This CSV contained six fields: ``to'', ``from'', ``message\textunderscore size'', ``started'', ``received'' and ``finished''.
+``to'' and ``from'', like in the previous test, contained the Bluetooth MAC address of client and server.
+``message\textunderscore size'' contained the size of the messages sent (1024 bytes by default).
+``started'' and ``stopped'' were timestamps mesured when the mesage was sent and a reply was received, completing the round-trip.
+
+\paragraph{Connection setup} 
+The messages coming back from the clients also contained a timestamp recorded when the client device received the messages.
+Its purpose was to estimate how much of the round-trip time was spent in establishing the connection.
+The problem with this approach was that the internal clocks of the devices were not synchronized and the data collected contained many inconsistencies.
+Presently the Android operating system does not allow to force a NTP sync or alter the system clock via API, thus preventing external applications from doing so.
+
+In order to understand how the number of devices affects the number of messages a device is able to deliver, a complete test run started by performing the test targeting one of the devices progressively increasing the number of device until all the requested devices were included.
+The results obtained from the tests are summarized and shown in \ref{figure:messages-per-second}.

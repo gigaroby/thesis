@@ -19,8 +19,8 @@ Manual pairing was performed on all three devices (each of them was paired with 
 After a couple of minutes where the messages each phone sent were not received by the other two, the three devices connected in a master-slave setup.
 
 One of the three devices (``A'') received messages sent from the other two (``B'' and ``C'') and was able to send messages to both.
-Messages sent by ``B'' were only received by ``A'' but never by ``C'' and vice versa.
-Any attempt to connect more devices to the chatroom proved unsuccessful.
+Messages sent by ``B'' were only received by ``A'' but never by ``C'' and vice-versa.
+Any attempt to connect more devices to the chat room proved unsuccessful.
 This test proved that while a possible communication channel between ``B'' and ``C'' was available through ``A'' the application was not able to exploit it to relay messages.\\
 
 Given that the previous experiment was not able to reliably connect devices via Bluetooth two of the devices were replaced with python scripts running on PCs with a Bluetooth dongle.
@@ -31,7 +31,7 @@ The connection on port 4 did not yield any result but the connection on port 15 
 \begin{figure}[ht!]
   \centering
   \includegraphics[width=0.2\textwidth]{img/diagram1.png} 
-  \caption{Device to device communication}
+  \caption{Topology created by three devices on Firechat. Device A could communicate with both B and C but did not pass messages between them}
 \end{figure}
 
 \paragraph{Message format}
@@ -43,7 +43,7 @@ We were not able to figure out what they represented but they were not needed to
 
 
 \begin{minipage}{\textwidth}
-  \begin{lstlisting}[caption=Sample Message,frame=tlrb]{Name}
+  \begin{lstlisting}[caption=Sample Firechat application message,frame=tlrb]{Name}
   {
     "uuid": "7e2b5e4a-d018-4...",
     "name": "John Doe",
@@ -62,7 +62,7 @@ For the second experiment one device with Firechat (``A'') and two PCs running a
 \begin{figure}[ht!]
   \centering
   \includegraphics[width=0.2\textwidth]{img/diagram2.png} 
-  \caption{PC to device communication}
+  \caption{Topology created by connecting two PCs with a device running Firechat. Used to verify that the application did not pass messages between two disjoint networks}
 \end{figure}
 
 \subsection{Conclusion}

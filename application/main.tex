@@ -1,0 +1,14 @@
+\chapter{MeshChat}
+Meshchat is a prototype application designed to deliver messages to as many clients as possible without the need for centralized infrastructure.
+The first step in the design of such an application is to understand whether or not the primitives offered by Bluetooth on Android are sufficient to perform the task.
+In the following chapter we describe the primitives provided, how we made sure that they were suitable for the task and how the final application uses them to achieve its goal.
+\section{Primitives}
+The API provided by the Android system to work with bluetooth only allows access to the RFCOMM layer of the protocol stack.
+Since RFCOMM emulates a serial connection it does not support sending a packet to more than one device at a time.
+In order to simulate a multicast transmission the application must send a message to each of its peers individually.
+
+An application can also discover nearby devices by requesting an inquiry scan.
+The inquiry scan is a very intensive operation that consumes a lot of battery power and degrades the transmission performance of the Bluetooth radio.
+Because of the drawbacks it is always best to perform short inquiry scans separated by a few minutes of pause.
+
+\input{application/performance}
