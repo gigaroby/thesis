@@ -1,5 +1,6 @@
 \section{Performance testing}
-To investigate whether or not the primitives provided were suitable for the task we implemented 3 synthetic benchmarks designed to closely match real world scenarios.
+To investigate whether or not the primitives provided were suitable for the task we implemented three benchmarks designed to be as similar as possible to real world scenarios.
+
 
 \subsection{Devices}
 Different devices were employed for testing. Table \ref{table:devices-used} provides a correspondence between names used in the graphs and the mark and model of the devices 
@@ -37,8 +38,23 @@ The test was then run between each pair of devices and the results are shown in 
 
 \subsection{Round trip time}
 In an application designed to allow people to communicate, the time a message takes to be delivered is an important parameter.
-In order to 
+The delivery time can be split into two parts, the setup of the connection and the delivery itself.
+Understanding how much time is spent on each of this two phases is critical in designing an efficient protocol.
 
+The benchmark tested the connection setup cost and round trip time of messages of various sizes.
+In order to make sure that the network wasn't loaded and the connection setup cost was being evaluated correctly only one device at a time could send messages.
+The protocol works as follows:
+
+\begin{enumerate}
+\item At the beginning of the test a random device is assigned a token
+\item The device holding the token selects another peer to communicate with
+\item A message is sent to the other peer which answers with a reply message
+\item The connection setup cost and round trip time are computed
+\item The token is passed to the other device
+\item Steps 2 to 5 are repeated a configurable amount of times
+\end{enumerate}
+
+The data collected is show in \ref{figure:rtt}.
 
 \begin{figure}[ht!]
   \centering

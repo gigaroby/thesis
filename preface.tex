@@ -2,6 +2,48 @@
 
 \epigraph{``Those who would give up essential Liberty, to purchase a little temporary Safety, deserve neither Liberty nor Safety.''}{--- \textup{Benjamin Franklin} }
 
+Social networks and instant messaging services gained a tremendous amount of popularity because they allow people to communicate freely and effectively.
+Popular services such as Twitter have been used to provide people with up-to-date information in times of crisis such as natural disasters.
+Recent events such as the Arab Spring and the Honk Kong protests showed that such applications are also useful as tools to allow the population to organize and communicate in the context of a large scale protest.
+
+While all of the popular services work very well in general, they suffer from a crippling flaw: they rely on centralized infrastructure to work.
+To connect to a service like Twitter, a smartphone requires a working Internet connection which can be provided by either a cellular network or by a WiFi Access Point.
+In case of a natural disaster, such a networking infrastructure may not be available for a variety of reasons, including power loss or damages to the antennas needed to relay signals.
+The issue gets worse when considering that infrastructure is always controlled by a government which can decide to limit access to it or forbid it entirely.
+
+Even tough WiFi and cellular networks require centralized infrastructure in order to work, modern smartphones are also equipped with technology that allows for direct communication.
+
+Direct communication between devices (peer-to-peer) is a form of communication where participating members (peers) rely on the exchange of messages between each other, eliminating the need for centralized infrastructure.
+Peer to peer communication is a well studied topic in computer science but its applications to mobile devices are very limited.
+
+The goal of this thesis work is to study the feasibility of a messaging system that does not rely on external infrastructure using technology commonly found on modern mobile devices.
+After a brief introduction detailing the technological choices (chapter 2) we provide an introduction on Bluetooth (chapter 3).
+
+In chapter four we analyze Firechat, a peer-to-peer application which has been used to circumvent the internet shutdown during the Honk Kong protests.
+
+In chapter six we present our work on a protocol designed to deliver messages in a Bluetooth mesh network.
+
+Chapter seven describes some of the technical challenges faced while developing Bluetooth enabled applications on the Android operating system.
+
+Chapter eight concludes the thesis with a discussion of possible future work.
+
+
+\paragraph{Near Field Communication (NFC)}
+is a form of radio transmission that only works when the two devices communicating are held at a distance of 10 centimeters or less. 
+This characteristic makes it well suited for use-cases such as payments where remote activation of the transmission at a considerable distance is undesirable but also makes it a poor choice for a messaging application.
+
+\paragraph{WiFi AdHoc} 
+is a decentralized form of wireless network. Unlike WiFi Infrastructure where a central device (Access Point) manages the routing of packages, in an AdHoc network the nodes are responsible of forwarding data between devices involved.
+
+\paragraph{WiFi Direct}
+is a wireless technology that works by emulating a WiFi Infrastructure setup. The device setting up the network becomes the Access Point (AP) and forwards packets between the other participating devices forming a Master-Slave setup.
+A master device can not participate in another WiFi network neither as a master nor as a slave.
+
+\paragraph{Bluetooth}
+is a wireless technology created with the goal of exchanging data over a short distance, typically in the order of tens of meters.
+
+
+
 In the following thesis we will discuss the design and implementation of a distributed peer to peer protocol for nearby communication.
 Peer-to-peer communication works by creating a network of interconnected devices that share messages between each other without relying on external infrastructure.
 
@@ -11,3 +53,10 @@ Peer-to-peer communication works by creating a network of interconnected devices
 --- bluetooth
 --- nfc
 --- wifi-infrastructure
+
+
+--alternative--
+- popolarita' piattaforme di messaging (whatsapp, ...)
+-- relyiano su infrastruttura di rete
+--- no zone rurali
+--- no proteste
