@@ -27,6 +27,16 @@ Chapter seven describes some of the technical challenges faced while developing 
 
 Chapter eight concludes the thesis with a discussion of possible future work.
 
+\chapter{Technology choices}
+In creating a mobile peer-to-peer application there are two important choices to make: which operating system to use and which communication technology is going to be used to relay messages.
+
+\section{Mobile Operating Systems}
+The smartphone market is divided between Google's Android (which owns roughly 78\% of market share), Apple's iOS (18\%), Microsoft's Windows Phone (3\%) and everything else (1\%).
+Given the fact that Android is the most used operating system we decided to focus our work on devices running it.
+Its diffusion also made it easier to find devices to test the application on.
+
+\section{Communication}
+As discussed, modern devices are equipped with the following communication technologies:
 
 \paragraph{Near Field Communication (NFC)}
 is a form of radio transmission that only works when the two devices communicating are held at a distance of 10 centimeters or less. 
@@ -42,21 +52,4 @@ A master device can not participate in another WiFi network neither as a master 
 \paragraph{Bluetooth}
 is a wireless technology created with the goal of exchanging data over a short distance, typically in the order of tens of meters.
 
-
-
-In the following thesis we will discuss the design and implementation of a distributed peer to peer protocol for nearby communication.
-Peer-to-peer communication works by creating a network of interconnected devices that share messages between each other without relying on external infrastructure.
-
-- external infrastructure is unreliable
--- evaluation of different peer-to-peer-tech
---- wifi-direct
---- bluetooth
---- nfc
---- wifi-infrastructure
-
-
---alternative--
-- popolarita' piattaforme di messaging (whatsapp, ...)
--- relyiano su infrastruttura di rete
---- no zone rurali
---- no proteste
+The
