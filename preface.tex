@@ -36,7 +36,8 @@ Given the fact that Android is the most used operating system we decided to focu
 Its diffusion also made it easier to find devices to test the application on.
 
 \section{Communication}
-As discussed, modern devices are equipped with the following communication technologies:
+As discussed, most modern devices are equipped with some form of device-to-device communication.
+The four technologies available for this purpose are:
 
 \paragraph{Near Field Communication (NFC)}
 is a form of radio transmission that only works when the two devices communicating are held at a distance of 10 centimeters or less. 
@@ -52,4 +53,8 @@ A master device can not participate in another WiFi network neither as a master 
 \paragraph{Bluetooth}
 is a wireless technology created with the goal of exchanging data over a short distance, typically in the order of tens of meters.
 
-The
+\subsection{Conclusion}
+Near Field Communication was not an option for obvious reasons, users would have to phisically touch devices in order to exchange messages.
+WiFi direct was not a good fit as it does not allow the creation of distributed newtorks, all the devices that want to communicate must be connected to the master.
+WiFi infrastructure would have been the best choice but it is not available on Android.
+Bluetooth allows the creation of mesh networks and has reasonable range. It is also available on every smartphone running Android.
