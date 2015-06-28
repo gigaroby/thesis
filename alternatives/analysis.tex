@@ -1,19 +1,19 @@
 \chapter{Analysis of alteratives}
 \section{Firechat}
 Firechat is a proprietary chat software available for iOS and Android devices.
-It is developed by OpenGarden \cite{opengarden}, a company specialized in the creation of peer-to-peer technology.
+It is developed by OpenGarden , a company specialized in the creation of peer-to-peer technology.
 One of the features of Firechat is the ability to communicate with nearby devices in order to exchange messages in the absence of an Internet connections.
 \textbf{Note}: we only tested the Android version of the application.
 
 \paragraph{Nearby Communication} In addition to the various chatrooms available on OpenGarden's servers, Firechat has a ``Nearby'' chatroom that is used to communicate directly with other devices.
-In order to spread messages into the ``Nearby'' chatroom the application leverages a combination of communication methods including: UDP broadcast, Bluetooth RFCOMM, Bluetooth Low Energy (BTLE) \cite{btle} and WiFi Direct \cite{wifi-direct}.
+In order to spread messages into the ``Nearby'' chatroom the application leverages a combination of communication methods including: UDP broadcast, Bluetooth RFCOMM, Bluetooth Low Energy (BTLE) and WiFi Direct.
 Messages sent in the ``Nearby'' chatroom are received by everyone else.
 
 \subsection{Analysis}
 Since the source code for the program was not available, some analysis were performed in order to infer the behavior of the application.
 
 \paragraph{Black box testing}
-In the first experiment a copy of the Firechat application was downloaded from the Google Play Store \cite{firechat-google-play-store} and installed on three devices.
+In the first experiment a copy of the Firechat application was downloaded from the Google Play Store and installed on three devices.
 Cellular and WiFi connections were turned off while Bluetooth was enabled.
 Manual pairing was performed on all three devices (each of them was paired with the other two) and then the application was opened.
 After a couple of minutes where the messages each phone sent were not received by the other two, the three devices connected in a master-slave setup.
@@ -57,7 +57,7 @@ We were not able to figure out what they represented but they were not needed to
 \end{minipage}
 
 \paragraph{Bluetooth protocol test}
-For the second experiment one device with Firechat (``A'') and two PCs running a custom scripts \cite{custom-script} (``B'' and ``C'') were used. The two PCs were connected to the phone via RFCOMM. In order to verify that ``A'' was not relaying messages, ``B'' was listening on the RFCOMM socket while ``C'' sent a message. While ``A'' received the message correctly it did not send it to ``C''. To verify that ``C'' was actually connected another message was sent by ``A'' and both ``B'' and ``C'' received correctly.
+For the second experiment one device with Firechat (``A'') and two PCs running a custom scripts (``B'' and ``C'') were used. The two PCs were connected to the phone via RFCOMM. In order to verify that ``A'' was not relaying messages, ``B'' was listening on the RFCOMM socket while ``C'' sent a message. While ``A'' received the message correctly it did not send it to ``C''. To verify that ``C'' was actually connected another message was sent by ``A'' and both ``B'' and ``C'' received correctly.
 
 \begin{figure}[ht!]
   \centering
@@ -66,7 +66,7 @@ For the second experiment one device with Firechat (``A'') and two PCs running a
 \end{figure}
 
 \subsection{Conclusion}
-Even though the application allows some form of local communication it has several problems that make it unfit for a context where discretion is important \cite{iraq-internet-filter} and an Internet connection is not available.
+Even though the application allows some form of local communication it has several problems that make it unfit for a context where discretion is important and an Internet connection is not available.
 
 First and foremost all of the messages sent through the application are not encrypted or verified in any way. This makes it trivially easy for an attacker to intercept and tamper with messages.
 Additionally if the recipient receives a message it has no way to verify its origin. This is true for both local (``Nearby'') and remote communication.

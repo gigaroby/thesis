@@ -1,0 +1,15 @@
+\subsection{Testing application}
+All of the performance tests were executed by a standard Android application which was installed on all of the devices.
+Since manually launching all of the test with different configurations would have been a very error prone task, the application embedded an HTTP server that allowed an operator to control all aspects of the test and retrieve the results at the end.
+The HTTP server listened on port $38080$ until the application was closed.
+This technique permitted manual testing when required but allowed a script to automatically perform various tests with different configurations automatically.
+
+The HTTP server on the device exposed a few different endpoints, some of which were used to gather information about the device itself and others to run the tests.
+For instance, a HTTP GET request on the \texttt{/mac} endpoint was used to get the Bluetooth MAC address and name for the device, information that was later used to run the tests.
+
+When a HTTP request was used to run a test, it usually blocked until the test was complete. This allowed the device to return the results as part of the HTTP response in CSV (comma separated values) format.
+When this was not possible, such as in the token test, the initial request returned a token which was then used on another endpoint to check the status and fetch the result of the computation.
+
+For this test setup to work all of the devices had to be connected to the same Local Area Network and the IP addresses were used as input for the script. 
+
+All of the code developed is available on Github \cite{test-code}.

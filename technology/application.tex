@@ -1,0 +1,33 @@
+
+\subsection{Benchmark Application}
+All of the benchmarking code was implemented in a standard android application which is available on Github \cite{benchmarking-code}.
+The application was responsible for running a simulation and collecting the relevant metrics for each simulation scenario.
+To allow programmatic access to all this functions, a small HTTP server \cite{nanohttpd} was embedded into the application.
+This approach allowed manual testing of the functionality during development as well as allowing a remote script to run the real simulations.
+Three endpoints were exposed on the HTTP server by the application; one to get the Bluetooth name and MAC address of the device and two to run simulations.
+
+A python script was developed to run the individual simulations, collect and plot the data generated in the process.
+The script used the list of local IP addresses as input and collected all of the necessary information via the \texttt{/mac} HTTP endpoint on each device.
+
+
+The second benchmark was designed to test the performance of a device to send multiple messages to a variety of other devices.
+For this test a single device, the master, sent a predefined number of messages to a set of devices.
+When the devices received a message they sent a reply back so that the master could compute the round-trip-time.
+
+To initiate the test the script invoked the \texttt{/messages} endpoint on the master device, passing a list of targets and the number of messages to send to each client as query string parameters.
+
+Each message sent by the master was tagged with a random UUID, so when the response was received, the master was able to compute the round trip time for that message.
+Once the master received a response for every request sent (or after the timeout went off), a CSV was returned as response to the HTTP request.
+This CSV contained six fields: ``to'', ``from'', ``message\textunderscore size'', ``started'', ``received'' and ``finished''.
+``to'' and ``from'', like in the previous test, contained the Bluetooth MAC address of client and server.
+``message\textunderscore size'' contained the size of the messages sent (1024 bytes by default).
+``started'' and ``stopped'' were timestamps mesured when the mesage was sent and a reply was received, completing the round-trip.
+
+
+\subsubsection{Technical details}The test begins when the master receives a HTTP GET request to the endpoint relative to the test, specifying parameters like order of the devices in the ring, number of rounds and size of payload. The master then creates a token, assigning to it a unique uuid that will identify that run of the test, and returns the uuid as the HTTP response.
+In order to enable the master to inform the peers about the configuration of the test, the information required is embedded in the token, that is subsequently passed between the devices.
+The master starts the process by sending a ping to the next device. Once it receives a pong (an acknowledgement), it sends the token to the next devices and waits until it receives the token again. 
+This process is repeated by every peer in the ring, as described in Algorithm \ref{pseudo:ring_peer}.
+When the master receives the token again, it saves the measurements taken locally (removing them from the token, thus preventing the token from becoming too large) and, if the desired number of rounds have been completed, stops the loop by not forwarding the token again to the following device.
+Results can then be retrieved by making a HTTP request to the master of the ring and specifying the UUID of the desired run of the test.
+

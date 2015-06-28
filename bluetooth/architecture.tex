@@ -26,7 +26,7 @@ The most widely used one is ACL, which garantees that data is delivered and in t
 ACL links can operate both in a symmetric and in a asymmetric mode, and can be granted a Quality of Service by setting the appropriate channel parameters during connection.
 
 \subsection{RFCOMM}
-The RFCOMM protocol \cite{RFCOMM} emulates the capabilities of the RS-232 serial ports over the L2CAP protocol. It was developed to make it easier for manufacterers to use the Bluetooth technology in their existing applications. Similarly to TCP, RFCOMM provides applications a simple point-to-point reliable data stream, supporting multiplexing and flow control between devices and applications.
+The RFCOMM protocol emulates the capabilities of the RS-232 serial ports over the L2CAP protocol. It was developed to make it easier for manufacterers to use the Bluetooth technology in their existing applications. Similarly to TCP, RFCOMM provides applications a simple point-to-point reliable data stream, supporting multiplexing and flow control between devices and applications.
 
 It is possible to maintain up to 60 simultaneous connections between two devices (each one can initialize up to 30 connections with the other one) using RFCOMM, while the maximum number of open simultaneous connections on a single device is implementation-specific.
 
@@ -48,9 +48,7 @@ Each attribute represent a characteristic of the service, such as the name or th
 
 
 \section{Bluetooth on Android}
-Older versions of Android relied on BlueZ \cite{bluez} as the implementation of the Bluetooth stack.
-Since version 4.2, BlueZ has been replaced by BlueDroid \cite{bluedroid}, an implementation of the Bluetooth Stack developed by Broadcom. 
+Older versions of Android relied on BlueZ as the implementation of the Bluetooth stack.
+Since version 4.2, BlueZ has been replaced by BlueDroid, an implementation of the Bluetooth Stack developed by Broadcom. 
 
-The Android SDK only provides RFCOMM as the transport layer \cite{android_rfcomm} and wraps it into a Java Socket \cite{android_rfcomm_java_socket}. 
-
-\dots
+The Android SDK only provides RFCOMM as the transport layer and wraps it into a Java Socket.

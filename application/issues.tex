@@ -1,0 +1,20 @@
+\subsection{Problems encountered}
+A variety of issues have contributed in making the development of the application more difficult.
+Different devices have often difficulties communicating through Bluetooth, especially when running different versions of the operating system. This could be caused by small changes in Android's Bluetooth stack, or by issues unique to a specific model.
+It is important to note that, starting with version 4.2 of the operating system, Android switched its Bluetooth stack from BlueZ, the linux Bluetooth stack, Bluedroid, which is developed by Broadcom. This could potentially be the cause of some of the issues encountered, since Bluedroid was immature when Google decided to include it in Android.
+
+The issues experienced can be broadly divided into three categories: errors that interrupted an established communication, issues that prevented the setup of a connection and misuse of the API due to poor documentation.
+
+The first type of error manifested itself as a \texttt{IOException: Broken Pipe} and was usually related to a race condition that caused a socket on either end of a connection to be erroneously closed.
+The issue disappeared as soon as we fixed the application's code.
+
+Errors while setting up a connection were a lot more frequent and, as far as we know, not caused by an error in the application.
+They would always manifest themselves as \texttt{IOException: read failed, socket might closed or timeout, read ret: -1}.
+After some research on developer communities it appears that this is a common issue with Bluetooth connections but nobody has been able to track down the root cause of it yet.
+Some developers claimed that a fix involving java reflection solved this problem in their application and provided code for others to use.
+Including the workaround in the code did not prove effective in our case.
+This particular error is the cause of all the reported failures in the tests.
+
+While we were insuccessful in preventing the issue from happening we noticed some patterns in how the error manifested itself.
+Performing a number of tests without a big enough pause (more than 60 seconds) between them seemed to raise 
+

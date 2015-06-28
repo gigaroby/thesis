@@ -1,5 +1,5 @@
 \section{Overview}
-Bluetooth devices operate in the ISM 2.4 Ghz \cite{ISM} band, a portion of the spectrum that can be utilized without licenses.
+Bluetooth devices operate in the ISM 2.4 Ghz band, a portion of the spectrum that can be utilized without licenses.
 The spectrum, from 2400 to 2483.5 MHz, is partitioned in 79 radio channels.
 The radio channels start at 2402 MHz and are 1 MHz wide.
 Given that the ISM spectrum is utilized by many other technologies such as 802.11g/n, cordless phones and microwave ovens, Bluetooth has been designed to be noise tolerant. 
@@ -10,7 +10,7 @@ Two or more devices that have the same hopping pattern share a physical channel 
 Piconets are the most basic form of Bluetooth communication upon which all other protocols are layered on.
 In a piconet a device must act as a master and all the other devices as slaves.
 The physical channel is divided into slots numbered according to the Bluetooth clock of the master.
-A time division duplex scheme \cite{TDDp} is used to schedule access to the channel and allow master and slaves to communicate.
+A time division duplex scheme is used to schedule access to the channel and allow master and slaves to communicate.
 All the communication in a piconet is between master and slaves, there is never direct communication between slaves.
 
 \paragraph{Addressing}
@@ -59,6 +59,6 @@ Bluetooth divides devices into three classes based on how much transmission powe
 Most modern smartphones are class 2 devices
 
 \subsection{Baseband}
-The \emph{baseband} \cite{baseband} implements the medium access control and physical layer parts of the Bluetooth system.
+The \emph{baseband} implements the medium access control and physical layer parts of the Bluetooth system.
 It manages physical channels and links, hop selection and scanning for nearby devices (inquiry scan).
 
