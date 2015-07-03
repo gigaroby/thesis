@@ -15,6 +15,10 @@ Some developers claimed that a fix involving java reflection solved this problem
 Including the workaround in the code did not prove effective in our case.
 This particular error is the cause of all the reported failures in the tests.
 
-While we were insuccessful in preventing the issue from happening we noticed some patterns in how the error manifested itself.
-Performing a number of tests without a big enough pause (more than 60 seconds) between them seemed to raise 
+While we were unsuccessful in preventing the issue from happening we noticed some patterns in how the error manifested itself.
+Performing a number of tests with a big enough pause (at least 60 seconds) between them seemed to lower the incidence of the problem.
+Also the problem appeared a lot more frequently when more than two devices where involved in the communication, like in the token test.
 
+Finally, the documentation provided on the Android website isn't very complete.
+For instance, we discovered that we could not open more than one concurrent connection to the same remote device.
+While this problem was easy to fix, the fact that such a surprising behavior is undocumented shows that Bluetooth is not yet a mature platform in the Android applications ecosystem.

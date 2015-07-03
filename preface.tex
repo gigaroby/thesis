@@ -1,31 +1,50 @@
 \chapter{Introduction}
+\pagenumbering{arabic}
 
 \epigraph{``Those who would give up essential Liberty, to purchase a little temporary Safety, deserve neither Liberty nor Safety.''}{--- \textup{Benjamin Franklin} }
 
 Social networks and instant messaging services gained a tremendous amount of popularity because they allow people to communicate freely and effectively.
 Popular services such as Twitter have been used to provide people with up-to-date information in times of crisis such as natural disasters.
-Recent events such as the Arab Spring and the Honk Kong protests showed that such applications are also useful as tools to allow the population to organize and communicate in the context of a large scale protest.
+Recent events such as the Arab Spring and the Honk Kong protests showed that such applications are also useful as tools to allow the population to organize and communicate in the context of a large scale protest \cite{firechat_hk}.
 
 While all of the popular services work very well in general, they suffer from a crippling flaw: they rely on centralized infrastructure to work.
 To connect to a service like Twitter, a smartphone requires a working Internet connection which can be provided by either a cellular network or by a WiFi Access Point.
 In case of a natural disaster, such a networking infrastructure may not be available for a variety of reasons, including power loss or damages to the antennas needed to relay signals.
 The issue gets worse when considering that infrastructure is always controlled by a government which can decide to limit access to it or forbid it entirely.
 
-Even tough WiFi and cellular networks require centralized infrastructure in order to work, modern smartphones are also equipped with technology that allows for direct communication.
+Even though WiFi and cellular networks require centralized infrastructure in order to work, modern smartphones are also equipped with technology that allows for direct communication.
 
 Direct communication between devices (peer-to-peer) is a form of communication where participating members (peers) rely on the exchange of messages between each other, eliminating the need for centralized infrastructure.
 Peer to peer communication is a well studied topic in computer science but its applications to mobile devices are very limited.
 
 The goal of this thesis work is to study the feasibility of a messaging system that does not rely on external infrastructure using technology commonly found on modern mobile devices.
-After a brief introduction detailing the technological choices (chapter 2) we provide an introduction on Bluetooth (chapter 3).
 
-In chapter four we analyze Firechat, a peer-to-peer application which has been used to circumvent the internet shutdown during the Honk Kong protests.
+\section{Review of the literature}
+A variety of studies has already been made in the field of device to device communication, for different reasons.
 
-In chapter six we present our work on a protocol designed to deliver messages in a Bluetooth mesh network.
+\paragraph{Serval Project}
+The Serval Project developed a mobile application that enables mobile devices running the Android operating system to communicate using their Wi-Fi connection.
+Since it is not possible for Android applications to create and manage ad-hoc Wi-Fi networks (unless the devices is rooted), devices running the Serval mesh periodically switch between client mode and access point mode \cite{serval_multi_modal}.
+This greatly limits the efficiency and operating range of the application, and makes it impossible to have an  end-to-end connection over many hops.
+In order to overcome this problem, the Serval project has developed a hardware utility that extends the range of a mesh network.
+However, those mesh extenders are expensive (costing up to 400\$), making their use impractical in contexts where cost of hardware is an important factor.
+Another downside of using Wi-Fi over Bluetooth is that the former is less power efficient, and may drain the battery of the device faster than Bluetooth.
 
-Chapter seven describes some of the technical challenges faced while developing Bluetooth enabled applications on the Android operating system.
+\paragraph{iTrust}
+The iTrust project \cite{iTrust} is a distributed system that permits the uncensored publication and access to information without depending on one or more central authorities.
+This project can rely on a moltitude of technologies in order to make the nodes communicate.
+It has been implemented over the HTTP, SMS and Wi-Fi direct protocols \cite{iTrust_http}.
+However, the iTrust project is meant for the distribution of information (as opposed to instant messaging, on which this thesis is focused), and its technology is not meant for applications where it is required that data is exchanged in almost real-time.
 
-Chapter eight concludes the thesis with a discussion of possible future work.
+\paragraph{Multipeer}
+Multipeer is a framework developed by Apple that enables applications to establish a multi-hop mesh network and communicate using different wireless interfaces, including Bluetooth, Wi-Fi and Wi-Fi ad hoc \cite{multipeer}.
+This framework is completely transparent for developers, and switches between protocols automatically when needed.
+However, this framework is available only on devices running the iOS operating system.
+
+\paragraph{LTE Advanced} The concept of device to device (D2D) communication is being researched for use in LTE Advanced networks \cite{lte_advanced}, in order to enable devices to talk directly when they are in close proximity.
+This would bring benefits under both the cost and performance perspectives, since the communication between those devices would not rely on the cellular network infrastructure.
+However, LTE Advanced does still rely on the cellular network for other purposes, like authentication, and this would make it unsuitable in situations where access to the cellular network is not possible.
+Moreover, the LTE technology is not yet common on mobile devices, and the cellular network infrastructure does not always support it.
 
 \chapter{Technology choices}
 In creating a mobile peer-to-peer application there are two important choices to make: which operating system to use and which communication technology is going to be used to relay messages.
@@ -55,6 +74,6 @@ is a wireless technology created with the goal of exchanging data over a short d
 
 \subsection{Conclusion}
 Near Field Communication was not an option for obvious reasons, users would have to phisically touch devices in order to exchange messages.
-WiFi direct was not a good fit as it does not allow the creation of distributed newtorks, all the devices that want to communicate must be connected to the master.
+WiFi direct was not a good fit as it does not allow the creation of distributed networks, all the devices that want to communicate must be connected to the master.
 WiFi infrastructure would have been the best choice but it is not available on Android.
-Bluetooth allows the creation of mesh networks and has reasonable range. It is also available on every smartphone running Android.
+Bluetooth allows the creation of mesh networks and has a reasonable range. It is also available on almost every smartphone running Android.

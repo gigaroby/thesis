@@ -39,18 +39,18 @@ In order to be sure to collect a sufficient amount of data, the test was perform
 The test has been performed on 4 sets of devices, forming 4 different ring configurations.
 For each of those ring configurations, the test has been executed a total of 40 times, 10 times for each payload size.
 Before every test, all the devices have been rebooted.
-A test was considered finished when the token passed through every peer of the ring 5 times.
+A test was considered finished when the token passed through every peer in the ring 5 times.
 
-In a portion of the tests that have been executed, a problem has arisen, preventing the test from finishing successfully.
+In a portion of the tests that have been executed a problem has arisen, preventing the test from finishing successfully.
 In those cases, the token would be blocked inside the ring mainly due to errors in the setup of the connection, preventing the test from continuing.
 When this occurred, data collected up to that point was saved and the the test continued with the next run.
 It is important to note that if a test consisting in $N$ token hops failed at the $n$th one, the remaining $N - n$ hops weren't completed and were accounted as failed transmissions.
-However, the problem would be less of an issue in network topologies other than a ring, where the failure of a node won't necessarily compromise the entire network.
+However, this would be less of an issue in network topologies other than a ring, where the failure of a node would not necessarily impact the delivery of the message.
 
 The correlation between rate of messages lost and configuration of the ring of devices is shown in Table \ref{table:failure_rate_ring_config}.
 The correlation between failures and size of payload transmitted, on the other hand, is shown in Table \ref{table:failure_rate_payload_size}.
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \begin{tabular}{llll}
 \hline
@@ -66,7 +66,7 @@ Redmi, Nexus 5, Nexus 7, Nexus 4    & Redmi       & 800     & 296        \\
 \end{table}
 
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \begin{tabular}{llll}
 \hline
@@ -92,9 +92,17 @@ The cost of connection setup becomes less significant when the same connection i
   \label{figure:conn_vs_transfer}
 \end{figure}
 
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=1.0\textwidth]{application/img/transfer-time-distribution.png}
+  \caption{Distribution of the time required to transfer a payload of different sizes}
+  \label{figure:transfer_time_distribution}
+\end{figure}
+
 Fig. \ref{figure:conn_vs_transfer} shows the impact that the time taken to setup a connection has over the total time needed to send a message of different sizes.
 For each set of measurements $(T_0, T_1, T_2, N)$, which represent respectively the time before the connection, after the connection and after the transmission of the message and the number of bytes transferred, the cost in time of connection setup was computed, for every payload size, as the mean of all the values $T_C = T_1 - T_0$.
 The cost of transmission of the message was computed, for every payload size, as the mean of the values $T_T = T_2 - T_1$.
+It is important to note that, given the small size of the payload sent during this test, measures taken about the transmission time are not to be considered fully accurate, in particular those involving the smallest payloads.
 
 \begin{figure}[ht!]
   \centering
@@ -104,7 +112,9 @@ The cost of transmission of the message was computed, for every payload size, as
 \end{figure}
 
 Fig \ref{figure:conn_time_distribution} shows the distribution of connection time observed during all the tests performed.
-Size of payload was not considered because the time to setup the connection was measured before the transmission of any data. Three outliers are not shown in the figure for representation purposes. Their values are 19105, 18956 and 7172 ms.
+Size of payload was not considered because the time to setup the connection was measured before the transmission of any data. 
+Data collected shows that the distribution of time required to open a connection does not change significantly using different pairs of devices.
+Three outliers are not shown in the figure for representation purposes. Their values are 19105, 18956 and 7172 ms.
 As can be seen, the vast majority of connections required a time between 1 and 2 seconds to setup.
-However, a non negligible amount of connections required a considerable amount of time to setup.
-Even though this behaviour was observed in a relatively small amount of samples, it should be taken into consideration when designing a system relying on the Bluetooth technology, particularly if this system is required to setup new connections frequently.
+However, a non negligible amount of connections required a considerably larger amount of time to setup.
+Even though this behaviour was observed in a relatively small amount of samples, it should be taken into account when designing a system relying on the Bluetooth technology, particularly if this system is required to setup new connections frequently.

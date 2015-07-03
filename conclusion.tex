@@ -1,0 +1,16 @@
+\chapter{Conclusion}
+In this thesis we tried to study whether or not it was possible to build a peer to peer messaging protocol using Bluetooth on Android.
+
+After designing a simple protocol based on flooding, we built a series of tests to verify whether Bluetooth primitives allowed an efficient implementation of such protocol.
+
+While results of our tests showed that the throughput in a point to point connection was sufficient even for the transmission of pictures and videos, the amount of time required to setup new connections was a lot greater than we anticipated, especially when dealing with more than one peer.
+The tests also highlighted a few stability issues of the Bluetooth API on Android.
+Tests would often fail without a specific reason, even in ideal testing conditions.
+
+Slow connection setups had a great impact on the first protocol designed, since a lot of connections had to be established in order to send a message to each peer.
+An alternative protocol that minimizes the creation of new connections could perform better, but it would still be affected by the stability issues of Bluetooth on Android.
+
+In the current situation, the development of a complex messaging application relying only on Bluetooth as its communication layer would be very challenging.
+In order to minimize the impact of the unreliability of Bluetooth, a better approach may be to create an hybrid system which uses more than one type of connection to carry data between devices.
+Such an approach has been proven effective by both OpenGarden in Firechat and Apple with its MultiPeer framework.
+
