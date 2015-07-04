@@ -1,10 +1,10 @@
 \begin{abstract}
 \pagenumbering{roman}
 The goal of this thesis is to investigate whether or not it is possible to implement a peer to peer messaging protocol on modern smartphones using Bluetooth.
-The focus has been on Android smartphones in particular, both because Android is by far the most common mobile operating system and because it has a lower barrier for entry than other mobile operating systems such as Apple's iOS.
+The focus has been on Android smartphones in particular, both because Android is by far the most common mobile operating system and because it has a lower barrier of entry than other mobile operating systems.
 
 Bluetooth is a wireless transmission technology created with the purpose of allowing short range communication between mobile devices.
-While it is best known for its use in Headsets and In-Car systems, Bluetooth is versatile enough to be used as a general-purpose communication channel.
+While it is best known for its use in headsets and in-car systems, Bluetooth is versatile enough to be used as a general-purpose communication channel.
 Android provides APIs for the RFCOMM layer of the Bluetooth protocol stack, which provides a connection-oriented, acknowledged channel with guarantees similar to those of TCP.
 Since the RFCOMM protocol emulates a serial cable, it does not support message broadcasting, and in order to send a message to a set of peers using this protocol, a point to point connection with each of those peers has to be established.
 
@@ -12,10 +12,10 @@ Even tough peer to peer networks are a well known problem in computer science, m
 The few studies that can be found usually employ either WiFi AdHoc or specific hardware in order to create the network.
 There are however, a few commercial applications that are based on the same concept and have gained some notoriety after being used in situations where a connection to the Internet was unavailable, such as the Hong Kong protests.
 Firechat is the best known application of such kind.
-In order to accomplish direct communication, Firechat uses a combination of communication technology available on the device.
+In order to accomplish direct communication, Firechat uses a combination of communication technologies available on the device.
 For instance, if the device is connected to a WiFi network and has Bluetooth enabled, Firechat will try to send the message both via Bluetooth and via UDP broadcast.
 However, during the tests performed, Firechat was unable to connect with all the other smartphones in order to form a mesh network using Bluetooth.
-A more targeted test revealed that Firechat does not infact send messages coming from other devices to its peers.
+A more targeted test revealed that Firechat does not, in fact, send messages coming from other devices to its peers.
 This severely limits its usefulness in situations where a steady Internet connection is not available.
 
 The first step in creating a system that could send messages over a mesh network was to design a very simple protocol to distribute messages and then verify that it worked with Bluetooth.
@@ -41,9 +41,9 @@ Other problems were simply due to issues in the Bluetooth drivers on a particula
 While altering the design of the protocol to reduce the number of new connection created might alleviate the problem, the issues are severe enough to make it unsuitable for the development of complex applications which have their focus on direct communication.
 A better approach might be to adopt a similar model to that of Firechat, using more than one communication technology at a time in order to achieve better reliability.
 
-After a brief introduction detailing the technological choices in chapter 2, we provide an introduction on Bluetooth.
+After a brief introduction detailing the technological choices in chapter two, we provide an introduction on Bluetooth.
 
-In chapter four we analyze Firechat, a peer-to-peer application which has gained popularity after being used to circumvent the internet shutdown during the Honk Kong protests.
+In chapter four we analyze Firechat, a peer-to-peer application which has gained popularity after being used to circumvent the Internet shutdown during the Honk Kong protests.
 
 In chapter five we present our work on the exploration of capabilities of Bluetooth on Android and report performance measured as well as all the issues encountered.
 

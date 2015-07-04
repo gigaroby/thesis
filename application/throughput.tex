@@ -9,15 +9,15 @@ When 20 transfers were completed the data collected was saved for further proces
 
 \begin{algorithm}
 	\begin{algorithmic}[1]
-  		\caption{client pseudocode}
+  		\caption{client}
   		\label{pseudo:tr_client}
-		\State $socket \leftarrow connectToServer()$
-		\State $results \leftarrow emptyList()$
+		\State $socket \leftarrow$ connectToServer()
+		\State $results \leftarrow$ emptyList()
 		\For{$i=1$ to $20$}
-		    \State $T_0 \leftarrow nanotime()$ \Comment current time in nanoseconds
-			\State $data \leftarrow socket.read(2048000)$ 
-			\State $T_1 \leftarrow nanotime()$
-			\State $list.add(T_1 - T_0)$
+		    \State $T_0 \leftarrow$ nanotime() \Comment current time in nanoseconds
+			\State $data \leftarrow socket$.read($2048000$)
+			\State $T_1 \leftarrow$ nanotime()
+			\State $results$.add($T_1 - T_0$)
 		\EndFor
 		\State \Return $results$
   	\end{algorithmic}
@@ -25,12 +25,12 @@ When 20 transfers were completed the data collected was saved for further proces
 
 \begin{algorithm}
 	\begin{algorithmic}[1]
-  		\caption{server pseudocode}
+  		\caption{server}
   		\label{pseudo:tr_server}
-  		\State $socket \leftarrow serverSocket.accept()$
+  		\State $socket \leftarrow serverSocket$.accept()
 		\Repeat
-		    \State $data \leftarrow randomByteArray(2048000)$
-            \State $socket.write(data)$
+		    \State $data \leftarrow$ randomByteArray($2048000$)
+            \State $socket$.write($data$)
 		\Until{client closes the connection}
 		\State \Return $results$
   	\end{algorithmic}

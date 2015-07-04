@@ -22,6 +22,8 @@ The goal of this thesis work is to study the feasibility of a messaging system t
 \section{Review of the literature}
 A variety of studies has already been made in the field of device to device communication, for different reasons.
 
+\paragraph{Mobile Ad Hoc Networking} RFC 2501 \cite{rfc2501} describes the characteristics of mobile ad hoc networks (MANETS). MANETS are defined as continuously self-configuring, infrastructure-less networks of mobile devices connected wirelessly.
+
 \paragraph{Serval Project}
 The Serval Project developed a mobile application that enables mobile devices running the Android operating system to communicate using their Wi-Fi connection.
 Since it is not possible for Android applications to create and manage ad-hoc Wi-Fi networks (unless the devices is rooted), devices running the Serval mesh periodically switch between client mode and access point mode \cite{serval_multi_modal}.
@@ -32,7 +34,7 @@ Another downside of using Wi-Fi over Bluetooth is that the former is less power 
 
 \paragraph{iTrust}
 The iTrust project \cite{iTrust} is a distributed system that permits the uncensored publication and access to information without depending on one or more central authorities.
-This project can rely on a moltitude of technologies in order to make the nodes communicate.
+This project can rely on a multitude of technologies in order to make the nodes communicate.
 It has been implemented over the HTTP, SMS and Wi-Fi direct protocols \cite{iTrust_http}.
 However, the iTrust project is meant for the distribution of information (as opposed to instant messaging, on which this thesis is focused), and its technology is not meant for applications where it is required that data is exchanged in almost real-time.
 
@@ -44,7 +46,10 @@ However, this framework is available only on devices running the iOS operating s
 \paragraph{LTE Advanced} The concept of device to device (D2D) communication is being researched for use in LTE Advanced networks \cite{lte_advanced}, in order to enable devices to talk directly when they are in close proximity.
 This would bring benefits under both the cost and performance perspectives, since the communication between those devices would not rely on the cellular network infrastructure.
 However, LTE Advanced does still rely on the cellular network for other purposes, like authentication, and this would make it unsuitable in situations where access to the cellular network is not possible.
-Moreover, the LTE technology is not yet common on mobile devices, and the cellular network infrastructure does not always support it.
+Moreover, the LTE technology is not yet common on mobile devices, and the network infrastructure does not always support it.
+
+\paragraph{IEEE 802.11s} IEEE 802.11s is a IEEE 802.11 amendment that tries to overcome the limitation of single-hop communications enabling the creation of wireless mesh networks \cite{ieee80211s}.
+Networks of this kind can be used to extend the range of an existing wireless network, or to enable the communication over a vast area during emergency situations, when network infrastructure may be unavailable.
 
 \chapter{Technology choices}
 In creating a mobile peer-to-peer application there are two important choices to make: which operating system to use and which communication technology is going to be used to relay messages.
@@ -72,8 +77,8 @@ A master device can not participate in another WiFi network neither as a master 
 \paragraph{Bluetooth}
 is a wireless technology created with the goal of exchanging data over a short distance, typically in the order of tens of meters.
 
-\subsection{Conclusion}
-Near Field Communication was not an option for obvious reasons, users would have to phisically touch devices in order to exchange messages.
+\subsection{Choice}
+Near Field Communication was not an option for obvious reasons, users would have to physically touch devices in order to exchange messages.
 WiFi direct was not a good fit as it does not allow the creation of distributed networks, all the devices that want to communicate must be connected to the master.
 WiFi infrastructure would have been the best choice but it is not available on Android.
-Bluetooth allows the creation of mesh networks and has a reasonable range. It is also available on almost every smartphone running Android.
+Bluetooth was selected because it allows the creation of mesh networks and has a reasonable range. It is also available on almost every smartphone running Android.
